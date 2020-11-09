@@ -8,13 +8,16 @@ import Loading from './../shared/Loading/Loading';
 import Nav from './../shared/Nav';
 import './Budget.css';
 
+import {connect} from "react-redux"
+
 
 class Budget extends Component {
 
   render() {
+    const {loading} = this.props.budget
     return (
       <Background>
-        {true ? <Loading /> : null}
+        {loading ? <Loading /> : null}
         <div className='budget-container'>
           <Nav />
           <div className='content-container'>
@@ -33,4 +36,13 @@ class Budget extends Component {
   }
 }
 
-export default Budget;
+const mapStateToProps = state => state
+
+// Effectively does the same as above
+// function mapStateToProps(state) {
+//   return {
+//     budget: state.budget
+//   }
+// }
+
+export default connect(mapStateToProps)(Budget);
